@@ -1,3 +1,4 @@
+// Array of Pokemon objects containing their details (name, image, type, and stats)
 const pokemons = [
     {
         name: "Charmander",
@@ -49,6 +50,7 @@ const pokemons = [
     }
 ];
 
+// Function to handle form submission
 const submitForm = () => {
     let formData = {
         first_name: $('#first_name').val(),
@@ -56,15 +58,17 @@ const submitForm = () => {
         password: $('#password').val(),
         email: $('#email').val()
     };
-    console.log("Form Data Submitted: ", formData);
+    console.log("Form Data Submitted: ", formData); // Display form data in console
 };
 
+// Select the card container from the HTML
 const cardContainer = document.getElementById("card-container");
-
+// Loop through each Pokemon and creating a card dynamically
 pokemons.forEach(pokemon => {
-    const card = document.createElement("div");
-    card.classList.add("card");
+    const card = document.createElement("div"); // Create a new div for the card
+    card.classList.add("card"); // Add the "card" class for styling
 
+    // Add content inside the card (image, name, type, and stats)
     card.innerHTML = `
         <img src="${pokemon.image}" alt="${pokemon.name}">
         <h2>${pokemon.name}</h2>
@@ -76,17 +80,18 @@ pokemons.forEach(pokemon => {
         </div>
     `;
 
+    // Append the new card to the card container
     cardContainer.appendChild(card);
 });
 
+// When the document is fully loaded initialize Materialize components
 $(document).ready(function () {
-    $('.materialboxed').materialbox();
-    $('.modal').modal(); // Initialize modal
-
+    $('.materialboxed').materialbox(); // Enable image zoom effect
+    $('.modal').modal(); // Initialize the modal for the registration form
+    // When the "Let's Catch Em" button is clicked, open the modal
     $('#clickMeButton').click(function () {
-        $('#modal1').modal('open'); // Open modal on button click
+        $('#modal1').modal('open');
     });
-
+    // Attach form submission event to the "Register" button
     $('#formSubmit').click(submitForm);
 });
-

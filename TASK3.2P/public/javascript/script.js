@@ -93,5 +93,7 @@ $(document).ready(function () {
         $('#modal1').modal('open');
     });
     // Attach form submission event to the "Register" button
-    $('#formSubmit').click(submitForm);
+    $('#formSubmit').click(()=>{
+        submitForm();
+    })
 });

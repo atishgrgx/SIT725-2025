@@ -1,0 +1,26 @@
+{
+  "name": "task6.2d",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atishgrgx/SIT725-2025"
+  },
+  "keywords": [],
+  "author": "Atish Gurung",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.13.1"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0",
+    "request": "^2.88.2"
+  }
+}

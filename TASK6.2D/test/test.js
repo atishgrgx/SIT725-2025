@@ -34,7 +34,6 @@ describe("Pokémon API Tests", function () {
             url: `${baseUrl}/api/pokemon/add`,
             json: newPokemon
         }, function (error, response, body) {
-            // Expecting a 400 Bad Request or similar error due to invalid data
             expect(response.statusCode).to.equal(400); 
             expect(body.error).to.equal("Name is required");
             done();

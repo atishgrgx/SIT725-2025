@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // Define the Pokemon schema
 const pokemonSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true},
     image: { type: String, required: true },
     type: { type: String, required: true },
     attack: { type: Number, required: true },

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pokémon World</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Internal CSS -->
+    <style>
+        input::placeholder,
+        textarea::placeholder {
+            color: black;
+            /* Darker placeholder text */
+        }
+
+        input,
+        textarea {
+            background-color: white;
+            color: black;
+        }
+
+        #postBtn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="navbar-size">
+            <a href="#" class="brand-logo"><img class="user-image-size" src="images/logoimage.png" /></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Home</a></li>
+                <li><a href="../view/pokedex.html">Pokedex</a></li>
+                <li><a href="#">Battles</a></li>
+                <li><a href="#">Trainers</a></li>
+                <li><a href="pokemonWorld.html">Pokemon World</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="container center-align">
+            <h2>Pokemon World for all the Trainners out there !!!!</h2>
+
+            <div class="row">
+                <div class="input-field col s6 offset-s3">
+                    <input id="pokemonName" type="text" placeholder="Pokemon Name" />
+                </div>
+                <div class="input-field col s6 offset-s3">
+                    <textarea id="pokemonDesc" class="materialize-textarea"
+                        placeholder="Describe your Pokemon"></textarea>
+                </div>
+                <div class="col s12">
+                    <button id="postBtn" class="btn waves-effect waves-light blue">
+                        Post Pokemon
+                    </button>
+                </div>
+            </div>
+
+            <h4>Live Pokemon Posts:</h4>
+            <hr />
+            <ul id="postList" class="collection"></ul>
+        </div>
+
+        <script>
+            const socket = io();
+
+            document.getElementById("postBtn").addEventListener("click", function () {
+                const name = document.getElementById("pokemonName").value;
+                const desc = document.getElementById("pokemonDesc").value;
+
+                if (name && desc) {
+                    socket.emit("newPost", { name, desc });
+                    document.getElementById("pokemonName").value = "";
+                    document.getElementById("pokemonDesc").value = "";
+                }
+            });
+
+            socket.on("newPost", function (post) {
+                const postList = document.getElementById("postList");
+                const li = document.createElement("li");
+                li.className = "collection-item";
+                li.innerHTML = `<strong>${post.name}</strong>: ${post.desc}`;
+                postList.prepend(li);
+            });
+        </script>
+    </main>
+    <!-- Footer Section -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h5 class="black-text">Pokemon World</h5>
+                    <p class="black-text text-lighten-4">
+                        Catch 'em all and enjoy your journey in the Pokemon universe.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center-align black-text">
+                © 2025 Pokemon Fan Page | Built with Materialize
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="javascript/script.js"></script>
+</body>
+
+</html>
